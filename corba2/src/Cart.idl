@@ -1,0 +1,41 @@
+module corba {
+	struct Category 
+	{
+		string c_name;
+	};
+
+	struct Product 
+	{
+		string name;
+		Category category;	
+	};
+	
+	struct OrderItem 
+	{
+		Product product;
+		long quantity;
+	};
+
+	typedef sequence<OrderItem> OrderItemList; 
+	typedef sequence<Product> ProductsList;	
+
+	exception ShoppingCartException {string message; };
+
+	interface IShoppingCart
+	{
+		void addToCart (in OrderItem items);
+		OrderItemList getItems();
+		void order();
+	};
+	
+	interface IStockDisplay{
+	ProductsList giveItems();
+	
+	};
+	interface ICartCreator{
+		
+	IShoppingCart shopcart();
+			
+	};
+	
+};
